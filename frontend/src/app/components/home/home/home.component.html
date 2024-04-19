@@ -1,0 +1,140 @@
+
+<p-card>
+
+
+    <div class="col-lg-5 div-mapa" style="height: 100%; padding-top: 2.1rem;">
+        <div style="display: flex; align-items: center; margin-bottom: 5px;">
+    
+        </div>
+    
+        <div class="mapa" id="map" leaflet [leafletOptions]="options" (leafletMapReady)="onMapReady($event)"></div>
+    </div>
+
+    <p-divider></p-divider>
+    <p-table
+        #dt
+        dataKey="vim"
+        responsiveLayout="scroll"
+        [value]="vehicles"
+        [(selection)]="selectedVehicle"
+        selectionMode="single"
+        [globalFilterFields]="['noEconomico', 'marca', 'modelo', 'anio', 'color', 'estatus']"
+        [filterDelay]="0"
+        [rows]="50"
+        [rowsPerPageOptions]="[50,100,200]"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} registros"
+        [paginator]="true"
+        [rowHover]="true"
+        styleClass="p-datatable-sm">
+
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <div class="col-12 lg:col-2">
+                    <p-button 
+                        icon="pi pi-plus" 
+                        pTooltip="Añadir nuevo vechículo"
+                        tooltipPosition="bottom" 
+                        styleClass="p-button-rounded mr-2"
+                        (onClick)="openVehicleDetail()">
+                    </p-button>
+                    <p-button 
+                        icon="pi pi-unlock" 
+                        pTooltip="Alternar estatus del vehículo"
+                        tooltipPosition="bottom"
+                        styleClass="p-button-rounded mr-2"
+                        (onClick)="updateVehicleStatus(selectedVehicle.vim)"
+                        [disabled]="!selectedVehicle">
+                    </p-button>
+                    <p-button 
+                        icon="pi pi-trash" 
+                        pTooltip="Eliminar vehículo"
+                        tooltipPosition="bottom"
+                        styleClass="p-button-rounded mr-2"
+                        (onClick)="deleteVehicle(selectedVehicle.vim)"
+                        [disabled]="!selectedVehicle">
+                </p-button>
+                </div>
+                <div class="col-12 lg:col-10">
+                    <span class="p-input-icon-left w-100">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="dt.filterGlobal($any($event).target.value, 'contains')" class="w-100" placeholder="Buscar..." />
+                    </span>
+                </div>
+            </div>
+
+        </ng-template>
+
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="noEconomico">
+                    No. Economico
+                    <p-columnFilter type="text" field="noEconomico" display="menu"></p-columnFilter>
+                </th>
+
+                <th pSortableColumn="marca">
+                    Marca
+                    <p-columnFilter type="text" field="marca" display="menu"></p-columnFilter>
+                </th>
+
+                <th pSortableColumn="modelo">
+                    Modelo
+                    <p-columnFilter type="text" field="modelo" display="menu"></p-columnFilter>
+                </th>
+
+                <th pSortableColumn="anio">
+                    Año
+                    <p-columnFilter type="numeric" field="anio" display="menu"></p-columnFilter>
+                </th>
+
+                <th pSortableColumn="color">
+                    Color
+                    <p-columnFilter type="text" field="color" display="menu"></p-columnFilter>
+                </th>
+                
+                <th pSortableColumn="estatus">
+                    Estatus
+                    <p-columnFilter type="numeric" field="estatus" display="menu"></p-columnFilter>
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-vehicle>
+            <tr  [pSelectableRow]="vehicle" [pSelectableRowDblClick]="vehicle" (dblclick)="openVehicleDetail(vehicle)" >
+                <td>
+                    {{vehicle.noEconomico}}
+                </td>
+
+                <td>
+                    {{vehicle.marca}}
+                </td>
+
+                <td>
+                    {{vehicle.modelo}}
+                </td>
+
+                <td>
+                    {{vehicle.anio}}
+                </td>
+
+                <td>
+                    {{vehicle.color}}
+                </td>
+
+                <td>
+                    {{vehicle.estatus}}
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+                <td [attr.colspan]="14" style="text-align: center;">
+                    Sin registros
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+</p-card>

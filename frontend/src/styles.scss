@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+/* ***** LEAFLET MAPS ***** */
+.div-map{
+    padding-bottom: 9px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #a7a7a8;
+    text-align: left;
+}
+.div-map :hover{
+    background-color: #fbfbfb;
+}
+.div-map h4{
+    margin-bottom: 0;
+}
+

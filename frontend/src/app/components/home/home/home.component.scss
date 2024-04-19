@@ -1,0 +1,12 @@
+.mapa {
+    height: 500px;
+    width: 500px;
+    background-color: rgb(141, 141, 141);
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 991px) {
+    .div-mapa  {
+        display: none;
+    }
+}
