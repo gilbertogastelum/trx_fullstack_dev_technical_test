@@ -84,10 +84,10 @@ export class Vehicle implements IVehicle {
     })
     public modelo: string;
 
-    @IsString()
+    @IsNumber()
     @ApiModelProperty({
         description: '',
-        type: SwaggerDefinitionConstant.STRING,
+        type: SwaggerDefinitionConstant.NUMBER,
         required: true
     })
     public anio: number;

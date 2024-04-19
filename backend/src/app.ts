@@ -89,16 +89,12 @@ class App {
                         200: {
                             description: 'Petición procesada correctamente.'
                         },
-                        401: {
-                            description: 'Error de autenticación.',
-                            type: swagger.SwaggerDefinitionConstant.STRING
-                        },
                         500: {
                             description: 'Error interno del servidor.',
                             type: swagger.SwaggerDefinitionConstant.STRING
                         }
                     },
-                    basePath: "/traxi/api"
+                    basePath: "/traxi/api/"
                 }
             })
         );
